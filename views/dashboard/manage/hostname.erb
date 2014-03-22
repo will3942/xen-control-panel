@@ -1,0 +1,57 @@
+<% if @error %>
+  <div class="alert alert-danger"><%= @error %></div>
+<% else %>
+  <% if @slice.running? %>
+    <p class="lead lead-inline"><%= @hostname %> - Online - Running for <%= @slice.instance.uptime.round(0) / 60 / 60 / 24 %> days.</p>
+  <% else %>
+    <p class="lead lead-inline"><%= @hostname %> - Offline</p>
+  <% end %>
+  <hr>
+  <div class="controls innerpadding">
+    <% if @slice.running? %>
+      <a href="#"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-play"></i>  Start</button></a>
+      <span class="spacer">&nbsp;</span>
+      <a href="/manage/<%= @hostname %>/shutdown"><button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-stop"></i>  Shutdown</button></a>
+      <span class="spacer">&nbsp;</span>
+      <a href="/manage/<%= @hostname %>/pre-destroy"><button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>  Destroy</button></a>
+    <% else %>
+      <a href="/manage/<%= @hostname %>/start"><button type="button" class="btn btn-success"><i class="glyphicon glyphicon-start"></i>  Start</button></a>
+      <span class="spacer">&nbsp;</span>
+      <a href="#"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-stop"></i>  Shutdown</button></a>
+      <span class="spacer">&nbsp;</span>
+      <a href="/manage/<%= @hostname %>/pre-destroy"><button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>  Destroy</button></a>
+    <% end %>
+  </div>
+  <span class="vert-spacer">&nbsp;</span><br />
+  <p class="lead lead-inline">Information</p>
+  <hr>
+  <div class="info innerpadding">
+    <table class="table table-bordered table-hover manage-vms">
+      <thead>
+        <tr>
+          <th>Hostname</th>
+          <th>IP</th>
+          <th>RAM</th>
+          <th>HDD</th>
+          <th>CPUs</th>
+          <th>OS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% vm = current_user.virtual_machines[@hostname.gsub('.', '-')] %>
+            <% if @slice.running? %>
+              <tr class="success">
+            <% else %>
+              <tr class="danger">
+            <% end %>
+              <td><%= @hostname %></td>
+              <td><%= vm["ip"] %></td>
+              <td><%= vm["ram"] %>MB</td>
+              <td><%= vm["hdd"] %>GB</td>
+              <td><%= vm["cpu"] %></td>
+              <td><%= vm["os"] %></td>
+            </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>

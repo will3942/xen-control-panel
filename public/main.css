@@ -1,0 +1,38 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.manage-button {
+  display: block;
+  margin: 0 auto;
+}
+
+.manage-vms th, td{
+  text-align: center !important;
+}
+
+.lead-inline {
+  display: inline;
+  margin-left: 10px;
+}
+
+.glyph-center {
+  vertical-align:middle;
+}
+
+.spacer {
+  width: 5px;
+}
+
+.vert-spacer {
+  height: 20px;
+}
+
+.innerpadding {
+  padding: 10px;
+}

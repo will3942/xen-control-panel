@@ -1,0 +1,34 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-hover manage-vms">
+    <thead>
+      <tr>
+        <th>Manage</th>
+        <th>Hostname</th>
+        <th>IP</th>
+        <th>RAM</th>
+        <th>HDD</th>
+        <th>CPUs</th>
+        <th>OS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.virtual_machines.each do |vm| %>
+        <% vm[0] = get_hostname(vm[0]) %>
+        <% xen = Xen::Slice.find(vm[0]) %>
+          <% if xen.running? %>
+            <tr class="success">
+          <% else %>
+            <tr class="danger">
+          <% end %>
+            <td><a href="/manage/<%= vm[0] %>"><button type="button" class="btn btn-default manage-button">Manage</button></a></td>
+            <td><%= vm[0] %></td>
+            <td><%= vm[1]["ip"] %></td>
+            <td><%= vm[1]["ram"] %>MB</td>
+            <td><%= vm[1]["hdd"] %>GB</td>
+            <td><%= vm[1]["cpu"] %></td>
+            <td><%= vm[1]["os"] %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
