@@ -36,3 +36,7 @@ body {
 .innerpadding {
   padding: 10px;
 }
+
+.manage-vms td {
+  vertical-align: middle !important;
+}
