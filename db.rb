@@ -5,14 +5,36 @@ Mongoid.load!("./mongoid.yml")
 
 class User
   include Mongoid::Document
+  belongs_to :rank
+  embeds_many :vms
 
-  field :username,   type: String
-  field :rank, type: String
-  field :virtual_machines, type: Hash
+  field :username, type: String
+  index({ username: 1 })
+  index "vms.hostname" => 1
+
+  validates_uniqueness_of :username
+  validates_presence_of :username
+  validates :username, uniqueness: true, presence: true
+end
+
+class VM
+  embedded_in :user
+
+  field :ram, type: Integer
+  field :swap, type: Integer
+  field :hdd, type: Integer
+  field :cpus, type: Integer
+  field :ip, type: String
+  field :hostname, type: String
+  field :os, type: String
+
+  validates_uniqueness_of :hostname, :ip
+  validates_presence_of :ram, :swap, :hdd, :cpus, :ip, :hostname, :os
 end
 
 class Rank
   include Mongoid::Document
+  has_many :users
 
   field :name, type: String
   field :create_vms, type: Boolean

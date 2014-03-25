@@ -71,4 +71,9 @@ if ask_question("Would you like to add a VM?")
   virtual_machines[hostname] = {:ram => ram, :hdd => hdd, :cpu => cpu, :ip => ip, :swap => swap, :os => os, :hostname => hostname, :price => price}
 end
 
-user.update_attributes(virtual_machines: virtual_machines)
+user.assign_attributes(virtual_machines: virtual_machines)
+if user.save
+
+else
+  p user.errors.full_messages
+end

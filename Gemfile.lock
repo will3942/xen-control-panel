@@ -115,6 +115,7 @@ DEPENDENCIES
   omniauth
   omniauth-oauth2
   omniauth-twitter
+  open4
   puma
   ruby-xen
   shotgun

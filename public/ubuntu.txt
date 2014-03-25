@@ -1,0 +1,14 @@
+edgy
+feisty
+gutsy
+hardy
+intrepid
+jaunty
+karmic
+lucid
+maverick
+natty
+oneiric
+precise
+quantal
+saucy

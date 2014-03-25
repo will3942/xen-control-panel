@@ -1,0 +1,8 @@
+sarge
+etch
+lenny
+squeeze
+wheezy
+sid
+jessie
+dapper
