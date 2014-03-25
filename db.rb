@@ -27,6 +27,7 @@ class VM
   field :ip, type: String
   field :hostname, type: String
   field :os, type: String
+  field :price, type: Float
 
   validates_uniqueness_of :hostname, :ip
   validates_presence_of :ram, :swap, :hdd, :cpus, :ip, :hostname, :os
