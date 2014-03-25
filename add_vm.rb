@@ -69,7 +69,7 @@ unless user.nil?
     price = get_input("Enter the price in GBP/month")
     abort("Please enter the price") unless price
 
-    vm = user.vms.new(:ram => ram, :hdd => hdd, :cpu => cpu, :ip => ip, :swap => swap, :os => os, :hostname => hostname, :price => price)
+    vm = user.vms.new(ram: ram, hdd: hdd, cpus: cpu, ip: ip, swap: swap, os: os, hostname: hostname, price: price)
   end
 
   if vm.save

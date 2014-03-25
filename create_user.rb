@@ -52,22 +52,28 @@ if ask_question("Would you like to create a new Rank?")
     free_upgrades = true
   end
 
-  Rank.create!(
+  rank = Rank.new(
     name: name,
     create_vms: create_vms,
     free_upgrades: free_upgrades
   )
+  if rank.save
+    puts "Rank saved successfully!"
+  else
+    puts "Failed to save rank, please email the following to mail@definedcode.com"
+    p user.errors.full_messages
+    abort("Failed.")
+  end
 end
 
 rank = get_input("Enter the user's rank")
 abort("Please enter a rank") unless rank
 
-rank = Rank.where(name: rank)
+rank = Rank.where(name: rank).first
 
 print "Saving user #{username}...."
-user = rank.user.new(
-  username: "#{get_id(username)}",
-  virtual_machines: virtual_machines
+user = rank.users.new(
+  username: "#{get_id(username)}"
 )
 if user.save
   puts "User saved successfully!"
@@ -97,7 +103,7 @@ if user.save
     price = get_input("Enter the price in GBP/month")
     abort("Please enter the price") unless price
 
-    vm = user.vms.new(:ram => ram, :hdd => hdd, :cpu => cpu, :ip => ip, :swap => swap, :os => os, :hostname => hostname, :price => price)
+    vm = user.vms.new(ram: ram, hdd: hdd, cpus: cpu, ip: ip, swap: swap, os: os, hostname: hostname, price: price)
 
     if vm.save
       puts "VM saved successfully!"

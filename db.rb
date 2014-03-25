@@ -17,7 +17,8 @@ class User
   validates :username, uniqueness: true, presence: true
 end
 
-class VM
+class Vm
+  include Mongoid::Document
   embedded_in :user
 
   field :ram, type: Integer
