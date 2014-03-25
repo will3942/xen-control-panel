@@ -9,17 +9,17 @@
   <hr>
   <div class="controls innerpadding">
     <% if @slice.running? %>
-      <a href="#"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-play"></i>  Start</button></a>
+      <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-play"></i>  Start</button>
       <span class="spacer">&nbsp;</span>
-      <a href="/manage/<%= @hostname %>/shutdown"><button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-stop"></i>  Shutdown</button></a>
+      <button type="button" class="btn btn-danger" onclick="powerOff('<%= @hostname %>');"><i class="glyphicon glyphicon-stop"></i>  Shutdown</button>
       <span class="spacer">&nbsp;</span>
-      <a href="/manage/<%= @hostname %>/pre-destroy"><button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>  Destroy</button></a>
+      <a href="/vms/<%= @hostname %>/destroy"><button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>  Destroy</button></a>
     <% else %>
-      <a href="/manage/<%= @hostname %>/start"><button type="button" class="btn btn-success"><i class="glyphicon glyphicon-play"></i>  Start</button></a>
+      <button type="button" class="btn btn-success" onclick="powerOn('<%= @hostname %>');"><i class="glyphicon glyphicon-play"></i>  Start</button>
       <span class="spacer">&nbsp;</span>
-      <a href="#"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-stop"></i>  Shutdown</button></a>
+      <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-stop"></i>  Shutdown</button>
       <span class="spacer">&nbsp;</span>
-      <a href="/manage/<%= @hostname %>/pre-destroy"><button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>  Destroy</button></a>
+      <a href="/vms/<%= @hostname %>/destroy"><button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>  Destroy</button></a>
     <% end %>
   </div>
   <span class="vert-spacer">&nbsp;</span><br />
@@ -38,7 +38,7 @@
         </tr>
       </thead>
       <tbody>
-        <% vm = current_user.virtual_machines[@hostname.gsub('.', '-')] %>
+        <% vm = current_user.vms.where(hostname: @hostname).first %>
             <% if @slice.running? %>
               <tr class="success">
             <% else %>

@@ -12,21 +12,20 @@
       </tr>
     </thead>
     <tbody>
-      <% current_user.virtual_machines.each do |vm| %>
-        <% vm[0] = get_hostname(vm[0]) %>
-        <% xen = Xen::Slice.find(vm[0]) %>
+      <% current_user.vms.each do |vm| %>
+        <% xen = Xen::Slice.find(vm["hostname"]) %>
           <% if xen.running? %>
             <tr class="success">
           <% else %>
             <tr class="danger">
           <% end %>
-            <td><a href="/manage/<%= vm[0] %>"><button type="button" class="btn btn-default manage-button">Manage</button></a></td>
-            <td><%= vm[0] %></td>
-            <td><%= vm[1]["ip"] %></td>
-            <td><%= vm[1]["ram"] %>MB</td>
-            <td><%= vm[1]["hdd"] %>GB</td>
-            <td><%= vm[1]["cpu"] %></td>
-            <td><%= vm[1]["os"] %></td>
+            <td><a href="/vms/<%= vm["hostname"] %>"><button type="button" class="btn btn-default manage-button">Manage</button></a></td>
+            <td><%= vm["hostname"] %></td>
+            <td><%= vm["ip"] %></td>
+            <td><%= vm["ram"] %>MB</td>
+            <td><%= vm["hdd"] %>GB</td>
+            <td><%= vm["cpu"] %></td>
+            <td><%= vm["os"] %></td>
           </tr>
       <% end %>
     </tbody>

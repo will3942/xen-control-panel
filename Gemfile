@@ -12,6 +12,7 @@ gem 'bson'
 gem 'bson_ext'
 gem 'twitter', '~> 5.0'
 gem 'open4'
+gem 'rack_csrf'
 
 group :development do
   gem 'shotgun'

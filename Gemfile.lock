@@ -78,6 +78,8 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.2)
       rack
+    rack_csrf (2.4.0)
+      rack (>= 0.9)
     ruby-xen (0.1.0)
       activesupport
       open4
@@ -117,6 +119,7 @@ DEPENDENCIES
   omniauth-twitter
   open4
   puma
+  rack_csrf
   ruby-xen
   shotgun
   sinatra

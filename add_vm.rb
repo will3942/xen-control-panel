@@ -49,7 +49,6 @@ unless user.nil?
 
     hostname = get_input("Enter the hostname")
     abort("Please enter a hostname") unless hostname
-    hostname = hostname.gsub('.', '-')
 
     cpu = get_input("Enter the number of CPUs")
     abort("Please enter a number") unless cpu

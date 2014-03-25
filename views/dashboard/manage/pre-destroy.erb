@@ -1,5 +1,5 @@
 <% if @error %>
   <div class="alert alert-danger"><%= @error %></div>
 <% else %>
-  <a href="/manage/<%= @hostname %>/destroy" class="pre-warning"><div class="alert alert-danger">Click here if you are sure you want to delete the VM <%= @hostname %>. This will not be reversible. All data will permanently be deleted.</div></a>
+  <a href="#" onclick="destroy('<%= @hostname %>');" class="pre-warning"><div class="alert alert-danger">Click here if you are sure you want to delete the VM <%= @hostname %>. This will not be reversible. All data will permanently be deleted.</div></a>
 <% end %>
